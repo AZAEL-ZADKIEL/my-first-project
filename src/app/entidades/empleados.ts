@@ -4,6 +4,7 @@ export class Empleados {
     cargo : String = "";
     edad : number = 0;
     genero : String = "";
+    email : String = "";
 
     constructor() {
         

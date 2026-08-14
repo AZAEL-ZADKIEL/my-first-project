@@ -12,6 +12,11 @@
 
         </div>
         <div class="form-floating mb-3 mt-3">
+            <input type="email" class="form-control" id="email" placeholder="Ingresa email" [(ngModel)]="empleado.email" name="email">
+            <label for="email" class="form-label">Email:</label>
+
+        </div>
+        <div class="form-floating mb-3 mt-3">
             <input type="text" class="form-control" id="cargo" placeholder="Ingresa cargo" [(ngModel)]="empleado.cargo" name="cargo">
             <label for="cargo" class="form-label">Cargo:</label>
 

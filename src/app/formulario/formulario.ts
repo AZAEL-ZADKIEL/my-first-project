@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class Formulario {
   titulo = 'FORMULARIO INGRESO';
 
-  empleado: Empleados;
+  empleado: Empleados = new Empleados;
 
   constructor() {}
 
