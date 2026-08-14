@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Empleados } from '../entidades/empleados';
 import { FormsModule } from '@angular/forms';
 
@@ -6,18 +6,15 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-formulario',
   imports: [FormsModule],
   templateUrl: './formulario.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './formulario.css',
 })
 export class Formulario {
-  titulo = "FORMULARIO INGRESO";
+  titulo = 'FORMULARIO INGRESO';
 
-  empleado : Empleados; 
+  empleado: Empleados;
 
-  constructor(){
+  constructor() {}
 
-  }
-
-  registrar (){
-
-  }
+  registrar() {}
 }
