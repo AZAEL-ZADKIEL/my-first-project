@@ -5,22 +5,19 @@
             <input type="text" class="form-control" id="cedula" placeholder="Ingresa cedula"
                 [(ngModel)]="empleado.cedula" name="cedula">
             <label for="cedula" class="form-label">Cedula:</label>
-
         </div>
         <div class="form-floating mb-3 mt-3">
             <input type="text" class="form-control" id="nombre" placeholder="Ingresa nombre completo"
                 [(ngModel)]="empleado.nombre" name="nombre">
             <label for="nombre" class="form-label">Nombre Completo:</label>
-
         </div>
         <div class="form-floating mb-3 mt-3">
             <input type="email" class="form-control" id="email" placeholder="Ingresa email" [(ngModel)]="empleado.email"
                 name="email">
             <label for="email" class="form-label">Email:</label>
-
         </div>
-        <div class="form-floating mb-3 mt-3"><select class="form-select" id="cargo" [(ngModel)]="empleado.cargo"
-                name="cargo">
+        <div class="form-floating mb-3 mt-3">
+            <select class="form-select" id="cargo" [(ngModel)]="empleado.cargo" name="cargo">
                 <option value="">Seleccionar cargo</option>
                 <option value="Ingeniero">Ingeniero</option>
                 <option value="Tecnico">Tecnico</option>
@@ -28,12 +25,10 @@
             </select>
             <label for="cargo" class="form-label">Cargo:</label>
         </div>
-
         <div class="form-floating mb-3 mt-3">
             <input type="number" class="form-control" id="edad" placeholder="Ingresa edad" [(ngModel)]="empleado.edad"
                 name="edad">
             <label for="edad" class="form-label">Edad:</label>
-
         </div>
         <div class="form-floating mb-3 mt-3">
             <select class="form-select" id="genero" [(ngModel)]="empleado.genero" name="genero">
@@ -42,18 +37,46 @@
                 <option value="femenino">Femenino</option>
             </select>
             <label for="genero" class="form-label">Género:</label>
-
-        </div>
-        <div class="row mt-3">
-            <div class="col-sm-4">
-                <button (click)="registrar()" class="btn btn-primary w-100">Registrar</button>
-            </div>
-            <div class="col-sm-4">
-                <button (click)="VerificarGenero()" class="btn btn-primary w-100">VerificarGenero</button>
-            </div>
-            <div class="col-sm-4">
-                <button (click)="VerificarCargo()" class="btn btn-primary w-100">Cargo</button>
-            </div>
         </div>
     </form>
+
+    <div class="row mt-3">
+        <div class="col-sm-4">
+            <button (click)="registrar()" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal">
+                Registrar
+            </button>
+        </div>
+        <div class="col-sm-4">
+            <button (click)="VerificarGenero()" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal">
+                Verificar Genero
+            </button>
+        </div>
+        <div class="col-sm-4">
+            <button (click)="VerificarCargo()" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal">
+                Verificar Cargo
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">{{modalTitulo}}</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body" style="white-space: pre-line;">
+                    {{modalMensaje}}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

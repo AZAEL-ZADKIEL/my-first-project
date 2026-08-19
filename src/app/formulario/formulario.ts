@@ -22,8 +22,16 @@ export class Formulario implements OnInit {
 
   bonificacion = 0;
 
+  modalTitulo = '';
+  modalMensaje = '';
+
   ngOnInit(): void {
     this.empleado = new Empleados();
+  }
+
+  mostrarModal(titulo: string, mensaje: string) {
+    this.modalTitulo = titulo;
+    this.modalMensaje = mensaje;
   }
 
   registrar() {
@@ -54,22 +62,22 @@ export class Formulario implements OnInit {
     }
 
     if (this.errores.length > 0) {
-      alert('Corrige los siguientes errores:\n' + this.errores.join('\n'));
+      this.mostrarModal('Corrige los siguientes errores', this.errores.join('\n'));
       return;
     }
 
-    alert(this.empleado.nombre + ' fue registrado correctamente');
+    this.mostrarModal('Registro exitoso', this.empleado.nombre + ' fue registrado correctamente');
     this.empleado = new Empleados();
   }
 
   VerificarGenero() {
     if (!this.empleado.genero || !this.empleado.edad) {
-      alert('Debes ingresar género y edad primero.');
+      this.mostrarModal('Faltan datos', 'Debes ingresar género y edad primero.');
       return;
     }
 
     if (this.empleado.edad < 18) {
-      alert('No se puede calcular la bonificación: el empleado debe ser mayor o igual a 18 años.');
+      this.mostrarModal('No permitido', 'No se puede calcular la bonificación: el empleado debe ser mayor o igual a 18 años.');
       return;
     }
 
@@ -79,17 +87,17 @@ export class Formulario implements OnInit {
       this.bonificacion = this.empleado.edad * 120000;
     }
 
-    alert('Bonificación calculada: $' + this.bonificacion.toLocaleString('es-CO'));
+    this.mostrarModal('La bonificación calculada', '$' + this.bonificacion.toLocaleString('es-CO'));
   }
 
   VerificarCargo() {
     if (!this.empleado.cargo) {
-      alert('Debes ingresar el cargo primero.');
+      this.mostrarModal('Faltan datos', 'Debes ingresar el cargo primero.');
       return;
     }
 
     if (!this.empleado.edad || this.empleado.edad < 18) {
-      alert('No se puede calcular el salario: el empleado debe ser mayor o igual a 18 años.');
+      this.mostrarModal('No permitido', 'No se puede calcular el salario: el empleado debe ser mayor o igual a 18 años.');
       return;
     }
 
@@ -97,18 +105,19 @@ export class Formulario implements OnInit {
     const salarioBase = this.salariosPorCargo[cargoKey];
 
     if (salarioBase === undefined) {
-      alert('Cargo no reconocido. Usa: Ingeniero, Tecnico o Aux.');
+      this.mostrarModal('Cargo no reconocido', 'Usa: Ingeniero, Tecnico o Aux.');
       return;
     }
 
     if (!this.empleado.genero) {
-      alert('Debes verificar el género primero para calcular la bonificación.');
+      this.mostrarModal('Faltan datos', 'Debes verificar el género primero para calcular la bonificación.');
       return;
     }
 
     const salarioTotal = salarioBase + this.bonificacion;
 
-    alert(
+    this.mostrarModal(
+      'Resumen de salario',
       'Salario básico: $' + salarioBase.toLocaleString('es-CO') + '\n' +
       'Bonificación: $' + this.bonificacion.toLocaleString('es-CO') + '\n' +
       'Salario total: $' + salarioTotal.toLocaleString('es-CO')
