@@ -24,55 +24,56 @@
                 "input": "public"
               }
             ],
-            "styles": ["node_modules/bootstrap/dist/css/bootstrap.min.css",
-            "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-            "src/styles.css"
-          ],
-          "scripts": [
-            "node_modules/bootstrap/dist/js/bootstrap.min.js",
-            "node_modules/@popperjs/core/dist/umd/popper.min.js"
-          ]
-        },
-        "configurations": {
-          "production": {
-            "budgets": [
-              {
-                "type": "initial",
-                "maximumWarning": "500kB",
-                "maximumError": "1MB"
-              },
-              {
-                "type": "anyComponentStyle",
-                "maximumWarning": "4kB",
-                "maximumError": "8kB"
-              }
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "src/styles.css"
             ],
-            "outputHashing": "all"
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
-          "development": {
-            "optimization": false,
-            "extractLicenses": false,
-            "sourceMap": true
-          }
-        },
-        "defaultConfiguration": "production"
-      },
-      "serve": {
-        "builder": "@angular/build:dev-server",
-        "configurations": {
-          "production": {
-            "buildTarget": "my-first-project:build:production"
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
           },
-          "development": {
-            "buildTarget": "my-first-project:build:development"
-          }
+          "defaultConfiguration": "production"
         },
-        "defaultConfiguration": "development"
-      },
-      "test": {
-        "builder": "@angular/build:unit-test"
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "my-first-project:build:production"
+            },
+            "development": {
+              "buildTarget": "my-first-project:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        }
       }
     }
   }
-}
 }

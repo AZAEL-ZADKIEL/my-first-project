@@ -1,28 +1,33 @@
 <div class="container p-5 my-5 border">
     <h1>{{titulo}}</h1>
-    <form action="/action_page.php">
+    <form (submit)="$event.preventDefault()">
         <div class="form-floating mb-3 mt-3">
-            <input type="text" class="form-control" id="cedula" placeholder="Ingresa cedula" [(ngModel)]="empleado.cedula" name="cedula">
+            <input type="text" class="form-control" id="cedula" placeholder="Ingresa cedula"
+                [(ngModel)]="empleado.cedula" name="cedula">
             <label for="cedula" class="form-label">Cedula:</label>
 
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="text" class="form-control" id="nombre" placeholder="Ingresa nombre completo" [(ngModel)]="empleado.nombre" name="nombre">
+            <input type="text" class="form-control" id="nombre" placeholder="Ingresa nombre completo"
+                [(ngModel)]="empleado.nombre" name="nombre">
             <label for="nombre" class="form-label">Nombre Completo:</label>
 
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="email" class="form-control" id="email" placeholder="Ingresa email" [(ngModel)]="empleado.email" name="email">
+            <input type="email" class="form-control" id="email" placeholder="Ingresa email" [(ngModel)]="empleado.email"
+                name="email">
             <label for="email" class="form-label">Email:</label>
 
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="text" class="form-control" id="cargo" placeholder="Ingresa cargo" [(ngModel)]="empleado.cargo" name="cargo">
+            <input type="text" class="form-control" id="cargo" placeholder="Ingresa cargo" [(ngModel)]="empleado.cargo"
+                name="cargo">
             <label for="cargo" class="form-label">Cargo:</label>
 
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="number" class="form-control" id="edad" placeholder="Ingresa edad" [(ngModel)]="empleado.edad" name="edad">
+            <input type="number" class="form-control" id="edad" placeholder="Ingresa edad" [(ngModel)]="empleado.edad"
+                name="edad">
             <label for="edad" class="form-label">Edad:</label>
 
         </div>
@@ -35,6 +40,14 @@
             <label for="genero" class="form-label">Género:</label>
 
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-sm 4">
+            <button (click)="registrar()" class="btn btn-primary">Registrar</button>
+        </div>
+        <div class="col-sm 4">
+            <button (click)="VerificarGenero()" class="btn btn-primary">VerificarGenero</button>
+        </div>
+        <div class="col-sm 4">
+            <button (click)="VerificarCargo()" class="btn btn-primary">Cargo</button>
+        </div>
     </form>
 </div>
