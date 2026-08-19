@@ -14,16 +14,16 @@ export class Formulario implements OnInit {
   empleado: Empleados = new Empleados();
   errores: string[] = [];
 
+  bonificacion = 0;
+
+  modalTitulo = '';
+  modalMensaje = '';
+
   salariosPorCargo: { [key: string]: number } = {
     ingeniero: 2500000,
     tecnico: 1800000,
     aux: 1200000,
   };
-
-  bonificacion = 0;
-
-  modalTitulo = '';
-  modalMensaje = '';
 
   ngOnInit(): void {
     this.empleado = new Empleados();
