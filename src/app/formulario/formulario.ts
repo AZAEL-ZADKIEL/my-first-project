@@ -14,6 +14,14 @@ export class Formulario implements OnInit {
   empleado: Empleados = new Empleados();
   errores: string[] = [];
 
+  salariosPorCargo: { [key: string]: number } = {
+    ingeniero: 2500000,
+    tecnico: 1800000,
+    aux: 1200000,
+  };
+
+  bonificacion = 0;
+
   ngOnInit(): void {
     this.empleado = new Empleados();
   }
@@ -54,11 +62,56 @@ export class Formulario implements OnInit {
     this.empleado = new Empleados();
   }
 
- 
-  VerificarCargo(){
+  VerificarGenero() {
+    if (!this.empleado.genero || !this.empleado.edad) {
+      alert('Debes ingresar género y edad primero.');
+      return;
+    }
 
+    if (this.empleado.edad < 18) {
+      alert('No se puede calcular la bonificación: el empleado debe ser mayor o igual a 18 años.');
+      return;
+    }
+
+    if (this.empleado.genero === 'femenino') {
+      this.bonificacion = this.empleado.edad * 100000;
+    } else if (this.empleado.genero === 'masculino') {
+      this.bonificacion = this.empleado.edad * 120000;
+    }
+
+    alert('Bonificación calculada: $' + this.bonificacion.toLocaleString('es-CO'));
   }
-  VerificarGenero(){
 
+  VerificarCargo() {
+    if (!this.empleado.cargo) {
+      alert('Debes ingresar el cargo primero.');
+      return;
+    }
+
+    if (!this.empleado.edad || this.empleado.edad < 18) {
+      alert('No se puede calcular el salario: el empleado debe ser mayor o igual a 18 años.');
+      return;
+    }
+
+    const cargoKey = this.empleado.cargo.trim().toLowerCase();
+    const salarioBase = this.salariosPorCargo[cargoKey];
+
+    if (salarioBase === undefined) {
+      alert('Cargo no reconocido. Usa: Ingeniero, Tecnico o Aux.');
+      return;
+    }
+
+    if (!this.empleado.genero) {
+      alert('Debes verificar el género primero para calcular la bonificación.');
+      return;
+    }
+
+    const salarioTotal = salarioBase + this.bonificacion;
+
+    alert(
+      'Salario básico: $' + salarioBase.toLocaleString('es-CO') + '\n' +
+      'Bonificación: $' + this.bonificacion.toLocaleString('es-CO') + '\n' +
+      'Salario total: $' + salarioTotal.toLocaleString('es-CO')
+    );
   }
 }
