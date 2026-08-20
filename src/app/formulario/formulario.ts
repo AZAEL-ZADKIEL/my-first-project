@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Empleados } from '../entidades/empleados';
 import { FormsModule } from '@angular/forms';
+import { EnviarDatos } from '../servicios/enviar-datos';
 
 @Component({
   selector: 'app-formulario',
@@ -24,6 +25,8 @@ export class Formulario implements OnInit {
     tecnico: 1800000,
     aux: 1200000,
   };
+
+  constructor(private enviarDatos: EnviarDatos){}
 
   ngOnInit(): void {
     this.empleado = new Empleados();
@@ -62,11 +65,12 @@ export class Formulario implements OnInit {
     }
 
     if (this.errores.length > 0) {
-      this.mostrarModal('Corrige los siguientes errores', this.errores.join('\n'));
+      this.mostrarModal('Corrige los siguientes errores:', this.errores.join('\n'));
       return;
     }
 
     this.mostrarModal('Registro exitoso', this.empleado.nombre + ' fue registrado correctamente');
+    this.enviarDatos.enviar(this.empleado); 
     this.empleado = new Empleados();
   }
 

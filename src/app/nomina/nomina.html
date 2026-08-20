@@ -1,0 +1,62 @@
+<div class="container p-5 my-5 border">
+    <h1>{{titulo}}</h1>
+    <form (submit)="$event.preventDefault()">
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="name" [(ngModel)]="nomina.empleado.nombre" name="name"
+                disabled="">
+            <label for="name" class="form-label">Nombre:</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="cargo" [(ngModel)]="nomina.empleado.cargo" name="cargo"
+                disabled="">
+            <label for="cargo" class="form-label"> cargo:</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="salario" [(ngModel)]="nomina.salario" name="salario">
+            <label for="salario" class="form-label">Salario:</label>
+        </div>
+    </form>
+
+    <div class="row mt-3">
+        <div class="col-sm-4">
+            <button (click)="calcularDescuentos()" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#myModal">
+                Ver Descuentos
+            </button>
+        </div>
+        <div class="col-sm-4">
+            <button (click)="calcularBonificacion()" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#myModal">
+                Ver Bonificación
+            </button>
+        </div>
+        <div class="col-sm-4">
+            <button (click)="mostrarNominaCompleta()" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#myModal">
+                Ver Nómina Completa
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">{{modalTitulo}}</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body" style="white-space: pre-line;">
+                    {{modalMensaje}}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
