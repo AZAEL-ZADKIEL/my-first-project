@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EnviarDatos } from '../servicios/enviar-datos';
 import { Nomina_Empleado } from '../entidades/nominas';
 import { FormsModule } from '@angular/forms';
+import { Empleados } from '../entidades/empleados';
 
 @Component({
   selector: 'app-nomina',
@@ -17,6 +18,7 @@ export class Nomina implements OnInit {
   cargo: String = "";
 
   nomina: Nomina_Empleado = new Nomina_Empleado();
+  nominaE: Empleados[];
 
   modalTitulo = '';
   modalMensaje = '';
@@ -28,7 +30,7 @@ export class Nomina implements OnInit {
 
   constructor(private enviarDatos: EnviarDatos) { }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     this.enviarDatos.disparador.subscribe((dato: null) => {
       if (dato != null) {
         this.datos = dato
@@ -36,6 +38,20 @@ export class Nomina implements OnInit {
         console.log(this.nomina.empleado.nombre)
       }
     })
+  }*/
+
+  ngOnInit(): void {
+    this.enviarDatos.disparador.subscribe(dato => {
+      if (dato != null) {
+        this.nominaE = dato.empleados;
+        console.log(this.nominaE)
+        this.nomina.empleado = this.nominaE[0];
+      }
+    });
+  }
+
+  ver() {
+    console.log(this.nominaE)
   }
 
   calcularDescuentos() {

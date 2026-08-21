@@ -15,6 +15,8 @@ export class Formulario implements OnInit {
   empleado: Empleados = new Empleados();
   errores: string[] = [];
 
+  empleados: Empleados[] = []
+
   bonificacion = 0;
 
   modalTitulo = '';
@@ -26,7 +28,7 @@ export class Formulario implements OnInit {
     aux: 1200000,
   };
 
-  constructor(private enviarDatos: EnviarDatos){}
+  constructor(private enviarDatos: EnviarDatos) { }
 
   ngOnInit(): void {
     this.empleado = new Empleados();
@@ -70,8 +72,14 @@ export class Formulario implements OnInit {
     }
 
     this.mostrarModal('Registro exitoso', this.empleado.nombre + ' fue registrado correctamente');
-    this.enviarDatos.enviar(this.empleado); 
+    this.empleados.push(this.empleado);
     this.empleado = new Empleados();
+  }
+
+  Enviar(){
+    this.titulo = "ENVIO DATOS"
+    this.enviarDatos.enviar({empleados : this.empleados})
+    this.modalMensaje = "Datos enviados"
   }
 
   VerificarGenero() {

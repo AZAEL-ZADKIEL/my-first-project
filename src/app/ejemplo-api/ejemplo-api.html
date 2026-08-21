@@ -1,0 +1,17 @@
+<!-- ejemplo-api.html -->
+<div class="container mt-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Imagen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of datosApi()">
+        <td>{{i.name}}</td>
+        <td><img src="{{i.image}}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
