@@ -1,5 +1,8 @@
-<!-- ejemplo-api.html -->
 <div class="container mt-3">
+  <button (click)="mostrar()">mostrar</button>
+  <button (click)="mostrarmujeres()">mostrar solo mujeres</button>
+  <hr>
+
   <table class="table">
     <thead>
       <tr>
@@ -8,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of datosApi()">
+      <tr *ngFor="let i of datosMostrados()">
         <td>{{i.name}}</td>
         <td><img src="{{i.image}}"></td>
       </tr>
