@@ -15,6 +15,10 @@ export class EjemploApi implements OnInit {
   constructor(private servicioApi: ServicioApi) { }
 
   ngOnInit(): void {
+    this.verapi();
+  }
+
+  verapi(){
     this.servicioApi.recibirDatos().subscribe({
       next: dato => {
         this.datosApi.set(dato.results);
