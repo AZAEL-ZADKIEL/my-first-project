@@ -15,9 +15,20 @@ export class Juegos implements OnInit{
       this.position=Math.floor(Math.random() * 3) + 1;
   }
 
-  descubrir(p: number){
+  async descubrir(p: number){
     if (this.position == p){
-      const ball = document
+      const ball = document.getElementById("img"+p) as HTMLImageElement;
+      ball.src="../../Img/Cara.png";
+      ball.style.width = "150px"
+      
+    } else {
+      const ball = document.getElementById("img"+p) as HTMLImageElement;
+      ball.src="../../Img/cuadro.png";
+
+      await new Promise(resolve => setTimeout(resolve,2000));
+
+      const vaso = document.getElementById("img"+p) as HTMLImageElement;
+      vaso.src="../../Img/Vaso.png";
     }
   }
 }
