@@ -57,4 +57,28 @@ export class EjemploApi implements OnInit {
     console.log(this.datosMostrados());
 
   }
+
+  vivosyaliens(){
+    var aliens: any[] = [];
+
+    for (var i of this.datosApi()) {
+      if (i.status == "Alive" && i.species=="Alien") {
+        aliens.push(i);
+      }
+    }
+    this.datosMostrados.set(aliens);
+    console.log(this.datosMostrados());
+  }
+
+  muertosyhumanos(){
+    var human: any[] = [];
+
+    for (var i of this.datosApi()) {
+      if (i.status == "Dead" && i.species=="Human") {
+        human.push(i);
+      }
+    }
+    this.datosMostrados.set(human);
+    console.log(this.datosMostrados());
+  }
 }
