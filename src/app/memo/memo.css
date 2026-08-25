@@ -1,0 +1,16 @@
+.memo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+  gap: 12px;
+  max-width: 460px;
+}
+
+.memo-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  cursor: pointer;
+  border: 2px solid #0d6efd;
+  border-radius: 8px;
+}

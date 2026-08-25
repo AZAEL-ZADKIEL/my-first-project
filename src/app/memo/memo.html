@@ -1,0 +1,22 @@
+<div class="container text-center my-5">
+  <h2 class="mb-4">Memo MANILA</h2>
+  <p class="text-muted mb-4">Encuentra la pareja ganadora escondida entre las cartas</p>
+
+  <p class="mb-3">
+    <span class="badge bg-secondary">Intentos: {{ intentos }}</span>
+  </p>
+
+  <div class="memo-grid mx-auto">
+    @for (i of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; track i) {
+      <img [id]="'carta' + i" src="/Img/cuadro.png" (click)="voltear(i)" class="memo-img">
+    }
+  </div>
+
+  <div id="mensajeGanaste" class="alert alert-success mt-4 mx-auto" style="max-width: 400px; display: none;">
+    🎉 ¡GANASTE!
+  </div>
+
+  <button class="btn btn-outline-primary mt-4" (click)="iniciarJuego()">
+    Reiniciar juego
+  </button>
+</div>
