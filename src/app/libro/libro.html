@@ -1,7 +1,37 @@
-<input [(ngModel)]="termino" placeholder="cien+años+de+soledad">
-<button (click)="buscar()">Buscar</button>
+<div class="container mt-4">
+  <h2>Buscador de Libros</h2>
 
-<div *ngFor="let libro of libros">
-  <img [src]="libro.foto" width="80">
-  <p>{{ libro.titulo }} — {{ libro.autor }} ({{ libro.anio }}) — {{ libro.idioma }}</p>
+  <div class="row mb-3">
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="cien años de soledad"
+        [(ngModel)]="termino"
+        (keyup.enter)="buscar()"
+      >
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-primary w-100" (click)="buscar()">Buscar</button>
+    </div>
+  </div>
+
+  <p *ngIf="mensaje">{{ mensaje }}</p>
+  <p *ngIf="cargando">Cargando...</p>
+
+  <div class="row">
+    <div class="col-sm-4 mb-3" *ngFor="let libro of libros">
+      <div class="card h-100">
+        <img *ngIf="libro.fotoUrl" [src]="libro.fotoUrl" class="card-img-top" alt="Foto autor">
+        <div class="card-body">
+          <h5 class="card-title">{{ libro.titulo }}</h5>
+          <p class="card-text">
+            <strong>Autor:</strong> {{ libro.autor }}<br>
+            <strong>Año:</strong> {{ libro.aniopublicacion }}<br>
+            <strong>Idioma:</strong> {{ libro.idioma }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
