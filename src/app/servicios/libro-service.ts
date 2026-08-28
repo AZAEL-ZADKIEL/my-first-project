@@ -1,13 +1,12 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Injectable} from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class LibroService {
-    private Apiurl = 'https://openlibrary.org';
-    constructor(private http: HttpClient){} 
+export class LibrosService {
+  constructor(private http: HttpClient) {}
 
-    buscarLibros(nombre: string): Observable<any> {
-    return this.http.get(`${this.Apiurl}/search.json?q=${nombre}`);
+  buscar(termino: string) {
+    const q = termino.trim().replace(/\s+/g, '+');
+    return this.http.get<any>(`https://openlibrary.org/search.json?q=${q}`);
   }
 }

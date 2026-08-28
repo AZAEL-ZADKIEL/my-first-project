@@ -1,42 +1,31 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Libros } from '../entidades/libros';
-import { LibroService } from '../servicios/libro-service';
+import { LibrosService } from '../servicios/libro-service';
 
 @Component({
   selector: 'app-libros',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './libro.html',
-  styleUrls: ['./libro.css']
+  templateUrl: './libro.html'
 })
-export class Libro {
-  terminoBusqueda: string = '';
-  libros: Libros[] = [];
-  cargando: boolean = false;
-  error: string = '';
+export class LibrosComponent {
+  termino = '';
+  libros: any[] = [];
 
-  constructor(private libroService: LibroService) {}
+  constructor(private libroService: LibrosService) {}
 
-  buscar(): void {
-    if (!this.terminoBusqueda.trim()) {
-      this.error = 'Ingresa el nombre de un libro para buscar';
-      return;
-    }
-    this.error = '';
-    this.cargando = true;
-
-    this.libroService.buscarLibros(this.terminoBusqueda).subscribe({
-      next: (resultados) => {
-        this.libros = resultados;
-        this.cargando = false;
-      },
-      error: (err) => {
-        this.error = 'Ocurrió un error al buscar los libros';
-        this.cargando = false;
-        console.error(err);
-      }
+  buscar() {
+    this.libroService.buscar(this.termino).subscribe(res => {
+      this.libros = res.docs.map((d: any) => ({
+        titulo: d.title,
+        autor: d.author_name ? d.author_name[0] : 'Sin dato',
+        anio: d.first_publish_year || 'Sin dato',
+        idioma: d.language ? d.language[0] : 'Sin dato',
+        foto: d.author_key
+          ? `https://covers.openlibrary.org/a/olid/${d.author_key[0]}-M.jpg`
+          : ''
+      }));
     });
   }
 }
