@@ -19,19 +19,27 @@
   <p *ngIf="mensaje()">{{ mensaje() }}</p>
   <p *ngIf="cargando()">Cargando...</p>
 
-  <div class="row">
-    <div class="col-sm-4 mb-3" *ngFor="let libro of libros()">
-      <div class="card h-100">
-        <img *ngIf="libro.fotoUrl" [src]="libro.fotoUrl" class="card-img-top" alt="Foto autor">
-        <div class="card-body">
-          <h5 class="card-title">{{ libro.titulo }}</h5>
-          <p class="card-text">
-            <strong>Autor:</strong> {{ libro.autor }}<br>
-            <strong>Año:</strong> {{ libro.aniopublicacion }}<br>
-            <strong>Idioma:</strong> {{ libro.idioma }}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <table class="table table-striped align-middle" *ngIf="libros().length > 0">
+    <thead>
+      <tr>
+        <th>Foto autor</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Año de publicación</th>
+        <th>Idioma</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let libro of libros()">
+        <td>
+          <img *ngIf="libro.fotoUrl" [src]="libro.fotoUrl" class="foto-autor" alt="Foto autor">
+          <span *ngIf="!libro.fotoUrl">Sin foto</span>
+        </td>
+        <td>{{ libro.titulo }}</td>
+        <td>{{ libro.autor }}</td>
+        <td>{{ libro.aniopublicacion }}</td>
+        <td>{{ libro.idioma }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
