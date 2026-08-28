@@ -17,7 +17,7 @@ export class Libro {
   cargando = signal<boolean>(false);
   mensaje = signal<string>('');
 
-  constructor(private libroService: LibrosService) {}
+  constructor(private libroService: LibrosService) { }
 
   buscar() {
     this.mensaje.set('');
@@ -42,7 +42,13 @@ export class Libro {
         console.log('Respuesta cruda de la API OpenLibrary:', res);
         console.log('Cantidad de resultados (docs) recibidos:', res.docs.length);
 
-        const resultado = res.docs.map((d: any, i: number) => {
+        const resultado: Libros[] = [];
+
+        if (res.docs.length > 0) {
+          // Solo se toma el PRIMER libro del listado que devuelve la búsqueda
+          const d = res.docs[0];
+          console.log('Se descarta el resto del listado; solo se usa el primer resultado (docs[0]).');
+
           const libro = new Libros();
           libro.titulo = d.title ?? 'Sin título';
           libro.autor = d.author_name ? d.author_name[0] : 'Sin dato';
@@ -52,7 +58,7 @@ export class Libro {
             ? `https://covers.openlibrary.org/a/olid/${d.author_key[0]}-M.jpg`
             : '';
 
-          console.log(`Libro #${i + 1} procesado:`, {
+          console.log('Libro procesado (único resultado mostrado):', {
             titulo: libro.titulo,
             author_name_completo: d.author_name,
             autor_usado: libro.autor,
@@ -63,8 +69,8 @@ export class Libro {
             fotoUrl_generada: libro.fotoUrl
           });
 
-          return libro;
-        });
+          resultado.push(libro);
+        }
 
         this.libros.set(resultado);
         this.cargando.set(false);
@@ -81,4 +87,4 @@ export class Libro {
       }
     });
   }
-}
+} 
