@@ -9,7 +9,7 @@ import { LibrosService } from '../servicios/libro-service';
   imports: [CommonModule, FormsModule],
   templateUrl: './libro.html'
 })
-export class LibrosComponent {
+export class Libro {
   termino = '';
   libros: any[] = [];
 
