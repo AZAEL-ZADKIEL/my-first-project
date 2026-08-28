@@ -1,0 +1,29 @@
+<div class="container mt-4">
+    <h2>Buscador de Libros</h2>
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Ej: cien años de soledad" [(ngModel)]="terminoBusqueda"
+            (keyup.enter)="buscar()" />
+        <button class="btn btn-primary" (click)="buscar()">Buscar</button>
+    </div>
+
+    <div *ngIf="error" class="alert alert-warning">{{ error }}</div>
+    <div *ngIf="cargando">Cargando...</div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let libro of libros">
+            <div class="card h-100">
+                <img [src]="libro.fotoUrl" class="card-img-top" alt="Foto autor"
+                    onerror="this.src='assets/sin-foto.png'" />
+                <div class="card-body">
+                    <h5 class="card-title">{{ libro.titulo }}</h5>
+                    <p class="card-text">
+                        <strong>Autor:</strong> {{ libro.autor }}<br>
+                        <strong>Año:</strong> {{ libro.aniopublicacion }}<br>
+                        <strong>Idiomas:</strong> {{ libro.idioma }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
