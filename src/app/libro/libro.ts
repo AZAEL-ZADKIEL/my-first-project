@@ -11,7 +11,7 @@ import { LibroService } from '../servicios/libro-service';
   templateUrl: './libro.html',
   styleUrls: ['./libro.css']
 })
-export class LibrosComponent {
+export class Libro {
   terminoBusqueda: string = '';
   libros: Libros[] = [];
   cargando: boolean = false;
