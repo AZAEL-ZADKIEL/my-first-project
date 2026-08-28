@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LibrosService } from '../servicios/libro-service';
@@ -13,26 +13,26 @@ import { Libros } from '../entidades/libros';
 })
 export class Libro {
   termino: string = '';
-  libros: Libros[] = [];
-  cargando: boolean = false;
-  mensaje: string = '';
+  libros = signal<Libros[]>([]);
+  cargando = signal<boolean>(false);
+  mensaje = signal<string>('');
 
   constructor(private libroService: LibrosService) {}
 
   buscar() {
-    this.mensaje = '';
+    this.mensaje.set('');
 
     if (!this.termino || this.termino.trim().length === 0) {
-      this.mensaje = 'Ingresa el nombre de un libro para buscar.';
+      this.mensaje.set('Ingresa el nombre de un libro para buscar.');
       return;
     }
 
-    this.cargando = true;
-    this.libros = [];
+    this.cargando.set(true);
+    this.libros.set([]);
 
     this.libroService.buscar(this.termino).subscribe({
       next: res => {
-        this.libros = res.docs.map((d: any) => {
+        const resultado = res.docs.map((d: any) => {
           const libro = new Libros();
           libro.titulo = d.title ?? 'Sin título';
           libro.autor = d.author_name ? d.author_name[0] : 'Sin dato';
@@ -44,15 +44,17 @@ export class Libro {
           return libro;
         });
 
-        this.cargando = false;
-        if (this.libros.length === 0) {
-          this.mensaje = 'No se encontraron libros con ese nombre.';
+        this.libros.set(resultado);
+        this.cargando.set(false);
+
+        if (resultado.length === 0) {
+          this.mensaje.set('No se encontraron libros con ese nombre.');
         }
       },
       error: err => {
-        this.cargando = false;
+        this.cargando.set(false);
         console.error('Error API OpenLibrary:', err);
-        this.mensaje = 'Ocurrió un error al consultar la API.';
+        this.mensaje.set('Ocurrió un error al consultar la API.');
       }
     });
   }

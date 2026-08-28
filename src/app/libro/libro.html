@@ -16,11 +16,11 @@
     </div>
   </div>
 
-  <p *ngIf="mensaje">{{ mensaje }}</p>
-  <p *ngIf="cargando">Cargando...</p>
+  <p *ngIf="mensaje()">{{ mensaje() }}</p>
+  <p *ngIf="cargando()">Cargando...</p>
 
   <div class="row">
-    <div class="col-sm-4 mb-3" *ngFor="let libro of libros">
+    <div class="col-sm-4 mb-3" *ngFor="let libro of libros()">
       <div class="card h-100">
         <img *ngIf="libro.fotoUrl" [src]="libro.fotoUrl" class="card-img-top" alt="Foto autor">
         <div class="card-body">
